@@ -1,7 +1,7 @@
 //Global Variables
 let humanScore = 0, computerScore = 0;
 
-//cheat = 1 lets you see the computers choice before making a decision.
+//cheat = 1 lets you see the computer's choice before making a decision (for debugging).
 let cheat = 1;
 
 function getComputerChoice() {
@@ -28,6 +28,7 @@ function getComputerChoice() {
     }
 
     if (cheat == 1) console.log("[Cheat] The computer chose " + computerChoice);
+
     return computerChoice;
 }
 
@@ -42,9 +43,6 @@ function getHumanChoice() {
 }
 
 function playRound (computerChoice, humanChoice) {
-    console.log("Computer chose: " + computerChoice);
-    console.log("You have chosen: " + humanChoice);
-
     if (humanChoice == computerChoice) {
         console.log("It is a tie! Both players chose " + humanChoice + "!");
     }
@@ -82,6 +80,8 @@ function playRound (computerChoice, humanChoice) {
     else {
         console.log("Something went wrong with the game, restarting round...");
     }
+
+    setTimeout(() => { startGame(); }, 1000);
 }
 
 function showScore() {
@@ -92,21 +92,26 @@ function startGame() {
     humanScore = 0;
     computerScore = 0;
 
+    console.log("Game start!");
     showScore();
     while (humanScore <3 && computerScore <3) {
+        console.log(" ");
         playRound(getComputerChoice(), getHumanChoice());
         showScore();
     }
 
     if (humanScore >= 3 && computerScore <3) {
-        console.log("Congratulations! You win the game! Rematching in 5 seconds...");
+        console.log("Congratulations! You win the game! Starting a new game...");
     }
 
     else if (computerScore >= 3 && humanScore <3) {
-        console.log("You lost the game... Rematching in 5 seconds...");
+        console.log("You lost the game... Starting a new game...");
     }
 
-    setTimeout(() => { startGame(); }, 5000);
+    console.log(" ");
+    console.log(" ");
+
+    startGame();
 }
 
 console.log("This is the Rock Paper Scissors Game!");
