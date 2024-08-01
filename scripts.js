@@ -34,7 +34,8 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    // let humanChoice = window.prompt("Choose rock, paper, or scissors.").toUpperCase();
+    //  let humanChoice = window.prompt("Choose rock, paper, or scissors.").toUpperCase();
+    let humanChoice = "";
 
     // while (humanChoice != "ROCK" && humanChoice != "PAPER" && humanChoice != "SCISSORS") {
     //      humanChoice = window.prompt("Choice is invalid. Please type 'rock', 'paper', or 'scissors'.").toUpperCase();
@@ -44,53 +45,48 @@ function getHumanChoice() {
 }
 
 function playRound (computerChoice, humanChoice) {
+    let gameSection = document.querySelector("section");
     let gameResult = document.createElement("div");
+    
     if (humanChoice == computerChoice) {
         gameResult.textContent = "It is a tie! Both players chose " + humanChoice + "!";
-        // console.log("It is a tie! Both players chose " + humanChoice + "!");
     }
 
     else if (humanChoice == "ROCK" && computerChoice == "PAPER") {
         gameResult.textContent = "You lose... " + humanChoice + " beats " + computerChoice + "!";
-        // console.log("You lose... " + humanChoice + " beats " + computerChoice + "!");
         computerScore++;
     }
 
     else if (humanChoice == "ROCK" && computerChoice == "SCISSORS") {
         gameResult.textContent = "You win! " + humanChoice + " beats " + computerChoice + "!"
-        // console.log("You win! " + humanChoice + " beats " + computerChoice + "!");
         humanScore++;
     }
 
     else if (humanChoice == "PAPER" && computerChoice == "ROCK") {
         gameResult.textContent = "You win! " + humanChoice + " beats " + computerChoice + "!";
-        // console.log("You win! " + humanChoice + " beats " + computerChoice + "!");
         humanScore++;
     }
 
     else if (humanChoice == "PAPER" && computerChoice == "SCISSORS") {
         gameResult.textContent = "You lose... " + humanChoice + " beats " + computerChoice + "!";
-        // console.log("You lose... " + humanChoice + " beats " + computerChoice + "!");
         computerScore++;
     }
 
     else if (humanChoice == "SCISSORS" && computerChoice == "ROCK") {
         gameResult.textContent = "You lose... " + humanChoice + " beats " + computerChoice + "!";
-        // console.log("You lose... " + humanChoice + " beats " + computerChoice + "!");
         computerScore++;
     }
 
     else if (humanChoice == "SCISSORS" && computerChoice == "PAPER") {
         gameResult.textContent = "You win! " + humanChoice + " beats " + computerChoice + "!";
-        // console.log("You win! " + humanChoice + " beats " + computerChoice + "!");
         humanScore++;
     }
 
     else {
         gameResult.textContent = "Something went wrong with the game, restarting round...";
-        // console.log("Something went wrong with the game, restarting round...");
     }
 
+    gameSection.appendChild(gameResult);
     setTimeout(() => { startGame(); }, 1000);
 }
 
@@ -108,7 +104,7 @@ function startGame() {
     // while (humanScore <3 && computerScore <3) {
         console.log(" ");
 
-        playRound(getComputerChoice(), humanChoice);
+    //    getChoice(getComputerChoice(), humanChoice);
         showScore();
     // }
 
