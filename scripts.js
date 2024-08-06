@@ -1,14 +1,15 @@
 //Global Variables
-let humanScore = 0, computerScore = 0;
-let round = 1;
-let computerChoice = "";
-let humanChoice = "";
+let humanScore = 0, computerScore = 0, round = 1;
+let computerChoice;
+let humanChoice;
 let gameScore = document.querySelector(".scoreboard");
+let p = document.querySelector("p");
 let scoreboard = document.createElement("div");
 let roundScore = document.createElement("div");
 
-//cheat = 1 lets you see the computer's choice before making a decision (for debugging).
+//cheat = 1 lets you see the computer's choice in the console before making a decision (for debugging).
 let cheat = 1;
+let cheatMsg = document.createTextNode("Cheats are ENABLED. View the console to see the computer's choice before choosing your own.");
 
 function getComputerChoice() {
     // Chooses a number between 1 and 3
@@ -76,7 +77,6 @@ function getHumanChoice() {
 }
 
 function playRound() {
-
     let endMsg = document.createElement("div");
     let continueButton = document.createElement("button");
 
@@ -220,8 +220,7 @@ function startGame() {
         showScore();
         playRound();
     });
-
 }
 
-console.log("This is the Rock Paper Scissors Game!");
+if (cheat == 1) p.appendChild(cheatMsg);
 startGame();
