@@ -31,13 +31,12 @@ function getComputerChoice() {
         computerChoice = "Not a valid shape";
     }
 
-    if (cheat == 1) console.log("[Cheat] The computer chose " + computerChoice);
+    if (cheat == 1) console.log("[Cheat] Round " + round + ": The computer chose " + computerChoice);
 
     return computerChoice;
 }
 
 function getHumanChoice() {
-    //Need to add playResult after each button
     let buttons = document.querySelector(".rpsgame");
     let showButtons = document.createElement("section");
     let btn_rock = document.createElement("button");
@@ -53,21 +52,21 @@ function getHumanChoice() {
     btn_scissors.textContent = "Scissors";
 
     btn_rock.addEventListener("click", () => {
-        console.log("You chose Rock.");
+        console.log("You chose ROCK");
         humanChoice = "ROCK";
         buttons.removeChild(showButtons);
         playResult();
     });
 
     btn_paper.addEventListener("click", () => {
-        console.log("You chose Paper.");
+        console.log("You chose PAPER");
         humanChoice = "PAPER";
         buttons.removeChild(showButtons);
         playResult();
     });
 
     btn_scissors.addEventListener("click", () => {
-        console.log("You chose Scissors.");
+        console.log("You chose SCISSORS");
         humanChoice = "SCISSORS";
         buttons.removeChild(showButtons);
         playResult();
@@ -77,28 +76,68 @@ function getHumanChoice() {
 }
 
 function playRound() {
+
+    let endMsg = document.createElement("div");
+    let continueButton = document.createElement("button");
+
     humanChoice = "";
     computerChoice = "";
 
-    getComputerChoice();
-    getHumanChoice();
+    if (humanScore >= 3 && computerScore <3) {
+        console.log("Congratulations! You win the game!");
+        endMsg.textContent = "Congratulations! You win the game! Start a new game?"
+        continueButton.textContent = "Rematch";
+        gameScore.appendChild(endMsg);
+        gameScore.appendChild(continueButton);
+        continueButton.addEventListener("click", () => {
+            gameScore.removeChild(endMsg);
+            gameScore.removeChild(continueButton);
+            gameScore.removeChild(roundScore);
+            gameScore.removeChild(scoreboard);
+            startGame();
+        });
+    }
+
+    else if (computerScore >= 3 && humanScore <3) {
+        console.log("You lost the game...");
+        endMsg.textContent = "You lost the game... Rematch?"
+        continueButton.textContent = "Rematch";
+        gameScore.appendChild(endMsg);
+        gameScore.appendChild(continueButton);
+    
+        continueButton.addEventListener("click", () => {
+            gameScore.removeChild(endMsg);
+            gameScore.removeChild(continueButton);
+            gameScore.removeChild(roundScore);
+            gameScore.removeChild(scoreboard);
+            startGame();
+        });
+    }
+
+    else {
+        getComputerChoice();
+        getHumanChoice();
+    }
 }
 
 function playResult() {
     let gameSection = document.querySelector(".rpsgame");
     let gameResult = document.createElement("div");
+    let resultButton = document.createElement("br");
     let roundEnd = document.createElement("button");
     
     gameSection.appendChild(gameResult);
 
     if (humanChoice == computerChoice) {
         gameResult.textContent = "It is a tie! Both players chose " + humanChoice + "!";
-        roundEnd.textContent = "Restarting Round";
+        gameResult.appendChild(resultButton);
+        roundEnd.textContent = "Continue";
         round++;
     }
 
     else if (humanChoice == "ROCK" && computerChoice == "PAPER") {
         gameResult.textContent = "You lose... " + humanChoice + " beats " + computerChoice + "!";
+        gameResult.appendChild(resultButton);
         roundEnd.textContent = "Continue";
         computerScore++;
         round++;
@@ -106,6 +145,7 @@ function playResult() {
 
     else if (humanChoice == "ROCK" && computerChoice == "SCISSORS") {
         gameResult.textContent = "You win! " + humanChoice + " beats " + computerChoice + "!"
+        gameResult.appendChild(resultButton);
         roundEnd.textContent = "Continue";
         humanScore++;
         round++;
@@ -113,6 +153,7 @@ function playResult() {
 
     else if (humanChoice == "PAPER" && computerChoice == "ROCK") {
         gameResult.textContent = "You win! " + humanChoice + " beats " + computerChoice + "!";
+        gameResult.appendChild(resultButton);
         roundEnd.textContent = "Continue";
         humanScore++;
         round++;
@@ -120,6 +161,7 @@ function playResult() {
 
     else if (humanChoice == "PAPER" && computerChoice == "SCISSORS") {
         gameResult.textContent = "You lose... " + humanChoice + " beats " + computerChoice + "!";
+        gameResult.appendChild(resultButton);
         roundEnd.textContent = "Continue";
         computerScore++;
         round++;
@@ -127,6 +169,7 @@ function playResult() {
 
     else if (humanChoice == "SCISSORS" && computerChoice == "ROCK") {
         gameResult.textContent = "You lose... " + humanChoice + " beats " + computerChoice + "!";
+        gameResult.appendChild(resultButton);
         roundEnd.textContent = "Continue";
         computerScore++;
         round++;
@@ -134,6 +177,7 @@ function playResult() {
 
     else if (humanChoice == "SCISSORS" && computerChoice == "PAPER") {
         gameResult.textContent = "You win! " + humanChoice + " beats " + computerChoice + "!";
+        gameResult.appendChild(resultButton);
         roundEnd.textContent = "Continue";
         humanScore++;
         round++;
@@ -141,20 +185,17 @@ function playResult() {
 
     else {
         gameResult.textContent = "Something went wrong with the game, restarting round...";
-        roundEnd.textContent = "Restart Round";
+        gameResult.appendChild(resultButton);
+        roundEnd.textContent = "Restarting Round";
     }
-
 
     gameResult.appendChild(roundEnd);
     roundEnd.addEventListener("click", () => {
         gameSection.removeChild(gameResult);
-        gameResult.removeChild(roundEnd);
         playRound();
     });
 
     showScore();
-    //gameSection.appendChild(gameResult);
-    // setTimeout(() => { startGame(); }, 1000);
 }
 
 function showScore() {
@@ -163,12 +204,11 @@ function showScore() {
 }
 
 function startGame() {
-
     let gameStart = document.querySelector(".scoreboard");
     let btn_start = document.createElement("button");
-    humanChoice = "";
     humanScore = 0;
     computerScore = 0;
+    round = 1;
 
     gameStart.appendChild(btn_start);
     btn_start.textContent = "Start Game";
@@ -181,24 +221,7 @@ function startGame() {
         playRound();
     });
 
-    //console.log("Game start!");
-    //showScore();
-    // while (humanScore <3 && computerScore <3) {
-    //    getChoice(getComputerChoice(), humanChoice);
-    //    showScore();
-    // }
-
-    // if (humanScore >= 3 && computerScore <3) {
-    //     console.log("Congratulations! You win the game! Starting a new game...");
-    // }
-
-    // else if (computerScore >= 3 && humanScore <3) {
-    //     console.log("You lost the game... Starting a new game...");
-    // }
 }
-
-
-//APP BEGINS
 
 console.log("This is the Rock Paper Scissors Game!");
 startGame();
