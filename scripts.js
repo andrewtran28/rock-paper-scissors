@@ -1,16 +1,18 @@
-//Global Variables
-let humanScore = 0, computerScore = 0, round = 1;
-let computerChoice;
-let humanChoice;
 const gameScore = document.querySelector(".scoreboard");
 const gameSection = document.querySelector(".rpsgame");
 const p = document.querySelector("p");
 const scoreboard = document.createElement("div");
 const roundScore = document.createElement("div");
 const btn_reset = document.querySelector("#reset")
+const btn_cheat = document.querySelector("#cheat");
+
+//Global Variables
+let humanScore = 0, computerScore = 0, round = 1;
+let computerChoice;
+let humanChoice;
 
 //cheat = 1 lets you see the computer's choice in the console before making a decision (for debugging).
-let cheat = 1;
+let cheat = true;
 let cheatMsg = document.createTextNode("Cheats are ENABLED. View the console to see the computer's choice before choosing your own.");
 
 function getComputerChoice() {
@@ -226,10 +228,24 @@ function startGame() {
     });
 }
 
-if (cheat == 1) p.appendChild(cheatMsg);
 startGame();
 
 btn_reset.addEventListener("click", () => {
     startGame();
     gameSection.innerHTML = "";
 })
+
+btn_cheat.addEventListener("click", () => {
+    if (cheat == true) {
+        p.appendChild(cheatMsg);
+        cheat = false;
+        btn_cheat.textContent = "Cheat: OFF";
+    }
+
+    else if (cheat == false) {
+        cheat = true;
+        btn_cheat.textContent = "Cheat: ON" ;
+        p.removeChild(cheatMsg);
+    }
+})
+
