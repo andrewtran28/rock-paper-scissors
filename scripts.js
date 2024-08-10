@@ -5,14 +5,16 @@ const scoreboard = document.createElement("div");
 const roundScore = document.createElement("div");
 const btn_reset = document.querySelector("#reset")
 const btn_cheat = document.querySelector("#cheat");
+const btn_winCond = document.querySelector("#firstTo");
 
 //Global Variables
 let humanScore = 0, computerScore = 0, round = 1;
 let computerChoice;
 let humanChoice;
+let winCondition = 3;
 
 //cheat = 1 lets you see the computer's choice in the console before making a decision (for debugging).
-let cheat = true;
+let cheat = false;
 let cheatMsg = document.createTextNode("Cheats are ENABLED. View the console to see the computer's choice before choosing your own.");
 
 function getComputerChoice() {
@@ -87,7 +89,7 @@ function playRound() {
     humanChoice = "";
     computerChoice = "";
 
-    if (humanScore >= 3 && computerScore <3) {
+    if (humanScore >= winCondition && computerScore < winCondition) {
         console.log("Congratulations! You win the game!");
         endMsg.textContent = "Congratulations! You win the game! Start a new game?"
         continueButton.textContent = "Rematch";
@@ -102,7 +104,7 @@ function playRound() {
         });
     }
 
-    else if (computerScore >= 3 && humanScore <3) {
+    else if (computerScore >= winCondition && humanScore < winCondition) {
         console.log("You lost the game...");
         endMsg.textContent = "You lost the game... Rematch?"
         continueButton.textContent = "Rematch";
@@ -233,11 +235,11 @@ startGame();
 btn_reset.addEventListener("click", () => {
     startGame();
     gameSection.innerHTML = "";
-})
+});
 
 btn_cheat.addEventListener("click", () => {
     if (cheat == true) {
-        p.appendChild(cheatMsg);
+        p.removeChild(cheatMsg);
         cheat = false;
         btn_cheat.textContent = "Cheat: OFF";
     }
@@ -245,7 +247,21 @@ btn_cheat.addEventListener("click", () => {
     else if (cheat == false) {
         cheat = true;
         btn_cheat.textContent = "Cheat: ON" ;
-        p.removeChild(cheatMsg);
+        p.appendChild(cheatMsg);
     }
-})
+});
 
+btn_winCond.addEventListener ("click", () => {
+    let newWin = parseInt(prompt("Enter the number of round wins to win the game.\n\nNote: This will reset any on-going game."));
+
+    if (newWin > 0) {
+        winCondition = newWin;
+        btn_winCond.textContent = "Win Condition: First to " + winCondition + " Wins";
+        startGame();
+        gameSection.innerHTML = "";
+    }
+
+    else {
+        window.alert("The number of required wins must be a positive integer.");
+    }
+});
