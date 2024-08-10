@@ -2,10 +2,12 @@
 let humanScore = 0, computerScore = 0, round = 1;
 let computerChoice;
 let humanChoice;
-let gameScore = document.querySelector(".scoreboard");
-let p = document.querySelector("p");
-let scoreboard = document.createElement("div");
-let roundScore = document.createElement("div");
+const gameScore = document.querySelector(".scoreboard");
+const gameSection = document.querySelector(".rpsgame");
+const p = document.querySelector("p");
+const scoreboard = document.createElement("div");
+const roundScore = document.createElement("div");
+const btn_reset = document.querySelector("#reset")
 
 //cheat = 1 lets you see the computer's choice in the console before making a decision (for debugging).
 let cheat = 1;
@@ -121,11 +123,11 @@ function playRound() {
 }
 
 function playResult() {
-    let gameSection = document.querySelector(".rpsgame");
     let gameResult = document.createElement("div");
     let resultButton = document.createElement("br");
     let roundEnd = document.createElement("button");
     
+    gameSection.innerHTML = "";
     gameSection.appendChild(gameResult);
 
     if (humanChoice == computerChoice) {
@@ -206,10 +208,12 @@ function showScore() {
 function startGame() {
     let gameStart = document.querySelector(".scoreboard");
     let btn_start = document.createElement("button");
+    
     humanScore = 0;
     computerScore = 0;
     round = 1;
 
+    gameStart.innerHTML = "";
     gameStart.appendChild(btn_start);
     btn_start.textContent = "Start Game";
 
@@ -224,3 +228,8 @@ function startGame() {
 
 if (cheat == 1) p.appendChild(cheatMsg);
 startGame();
+
+btn_reset.addEventListener("click", () => {
+    startGame();
+    gameSection.innerHTML = "";
+})
