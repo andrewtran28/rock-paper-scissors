@@ -55,11 +55,11 @@ function getHumanChoice() {
     img_rock.className = "img_choice";
 
     let img_paper = document.createElement("img");
-    img_paper.src = "/img/paper.jpg";
+    img_paper.src = "img/paper.jpg";
     img_paper.className = "img_choice";
 
     let img_scissors = document.createElement("img");
-    img_scissors.src = "./img/scissors.jpg";
+    img_scissors.src = "img/scissors.jpg";
     img_scissors.className = "img_choice";
 
     buttons.appendChild(showButtons);
