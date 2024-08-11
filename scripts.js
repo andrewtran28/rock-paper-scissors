@@ -69,9 +69,6 @@ function getHumanChoice() {
     btn_rock.appendChild(img_rock);
     btn_paper.appendChild(img_paper);
     btn_scissors.appendChild(img_scissors);
-    // btn_rock.textContent = "Rock";
-    // btn_paper.textContent = "Paper";
-    // btn_scissors.textContent = "Scissors";
 
     btn_rock.addEventListener("click", () => {
         humanChoice = "ROCK";
