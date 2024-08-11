@@ -1,4 +1,5 @@
 body {
+    background-color: rgb(255, 237, 196);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,13 +8,15 @@ body {
     margin: 0;
     padding: 0;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-color: rgb(255, 237, 196);
+
 }
 
 h1 {
-    font-size: 50px;
-    padding: 20px;
     background-color: rgb(212, 127, 255);
+    font-size: 50px;
+    padding: 20px 30px;
+    width: 800px;
+    margin: 10px;
 }
 
 button {
@@ -29,15 +32,17 @@ button {
 } 
 
 .options-cont {
+    background-color: rgb(185, 255, 160);
     font-size: 40px;
     font-weight: 600;
     display: flex;
     align-items: center;
     flex-direction: column;
     padding: 30px;
-    margin: 20px;
+    margin: 10px;
     height: 150px;
-    background-color: rgb(185, 255, 160)
+    width: 800px;
+
 }
 
 .cheat {
@@ -48,7 +53,6 @@ button {
 }
 
 .scoreboard {
-    border: 1px solid blue;
     background-color: lightblue;
     display: flex;
     flex-direction: column;
@@ -57,7 +61,8 @@ button {
     font-size: 30px;
     font-weight: 600;
     padding: 30px;
-    margin: 20px;
+    margin: 10px;
+    width: 800px;
 }
 
 .rpsgame {
@@ -69,7 +74,8 @@ button {
     font-size: 20px;
     font-weight: 600;
     height: auto;
-    width: 700px;
+    width: 800px;
+    margin: 10px;
 }
 
 .footer {
