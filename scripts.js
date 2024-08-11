@@ -50,13 +50,28 @@ function getHumanChoice() {
     let btn_paper = document.createElement("button");
     let btn_scissors = document.createElement("button");
 
+    let img_rock = document.createElement("img");
+    img_rock.src = "/img/rock.jpg";
+    img_rock.className = "img_choice";
+
+    let img_paper = document.createElement("img");
+    img_paper.src = "/img/paper.jpg";
+    img_paper.className = "img_choice";
+
+    let img_scissors = document.createElement("img");
+    img_scissors.src = "/img/scissors.jpg";
+    img_scissors.className = "img_choice";
+
     buttons.appendChild(showButtons);
     showButtons.appendChild(btn_rock);
     showButtons.appendChild(btn_paper);
     showButtons.appendChild(btn_scissors);
-    btn_rock.textContent = "Rock";
-    btn_paper.textContent = "Paper";
-    btn_scissors.textContent = "Scissors";
+    btn_rock.appendChild(img_rock);
+    btn_paper.appendChild(img_paper);
+    btn_scissors.appendChild(img_scissors);
+    // btn_rock.textContent = "Rock";
+    // btn_paper.textContent = "Paper";
+    // btn_scissors.textContent = "Scissors";
 
     btn_rock.addEventListener("click", () => {
         humanChoice = "ROCK";
@@ -239,16 +254,16 @@ btn_cheat.addEventListener("click", () => {
 });
 
 btn_winCond.addEventListener ("click", () => {
-    let newWin = parseInt(prompt("Enter the number of round wins to win the game.\n\nNote: This will reset any on-going game."));
+    let newWin = parseInt(prompt("Enter the number of Round wins a player needs to achieve (Between 1-100).\n\nNote: This will reset any on-going game."));
 
-    if (newWin > 0) {
+    if (newWin > 0 && newWin <= 100) {
         winCondition = newWin;
-        btn_winCond.textContent = "Win Condition: First to " + winCondition + " Wins";
+        btn_winCond.textContent = "Win Condition: First to " + winCondition;
         startGame();
         gameSection.innerHTML = "";
     }
 
     else {
-        window.alert("The number of required wins must be a positive integer.");
+        window.alert("The number of Round wins must be between 1-100.");
     }
 });
