@@ -1,6 +1,6 @@
 const gameScore = document.querySelector(".scoreboard");
 const gameSection = document.querySelector(".rpsgame");
-const p = document.querySelector("p");
+const toggleCheat = document.querySelector(".cheat");
 const scoreboard = document.createElement("div");
 const roundScore = document.createElement("div");
 const btn_reset = document.querySelector("#reset")
@@ -11,11 +11,11 @@ const btn_winCond = document.querySelector("#firstTo");
 let humanScore = 0, computerScore = 0, round = 1;
 let computerChoice;
 let humanChoice;
-let winCondition = 3;
+let winCondition = 5;
 
 //cheat = 1 lets you see the computer's choice in the console before making a decision (for debugging).
 let cheat = false;
-let cheatMsg = document.createTextNode("Cheats are ENABLED. View the console to see the computer's choice before choosing your own.");
+let cheatMsg = document.createTextNode("Cheats are ENABLED. View the console to see the computer's choice.");
 
 function getComputerChoice() {
     // Chooses a number between 1 and 3
@@ -123,75 +123,66 @@ function playRound() {
 
 function playResult() {
     let gameResult = document.createElement("div");
-    let resultButton = document.createElement("div");
-    let roundEnd = document.createElement("button");
+    let btn_roundEnd = document.createElement("button");
     
     gameSection.innerHTML = "";
     gameSection.appendChild(gameResult);
 
     if (humanChoice == computerChoice) {
         gameResult.textContent = "It is a tie! Both players chose " + humanChoice + "!";
-        gameResult.appendChild(resultButton);
-        roundEnd.textContent = "Continue";
+        btn_roundEnd.textContent = "Continue";
         round++;
     }
 
     else if (humanChoice == "ROCK" && computerChoice == "PAPER") {
         gameResult.textContent = "You lose... " + humanChoice + " beats " + computerChoice + "!";
-        gameResult.appendChild(resultButton);
-        roundEnd.textContent = "Continue";
+        btn_roundEnd.textContent = "Continue";
         computerScore++;
         round++;
     }
 
     else if (humanChoice == "ROCK" && computerChoice == "SCISSORS") {
         gameResult.textContent = "You win! " + humanChoice + " beats " + computerChoice + "!"
-        gameResult.appendChild(resultButton);
-        roundEnd.textContent = "Continue";
+        btn_roundEnd.textContent = "Continue";
         humanScore++;
         round++;
     }
 
     else if (humanChoice == "PAPER" && computerChoice == "ROCK") {
         gameResult.textContent = "You win! " + humanChoice + " beats " + computerChoice + "!";
-        gameResult.appendChild(resultButton);
-        roundEnd.textContent = "Continue";
+        btn_roundEnd.textContent = "Continue";
         humanScore++;
         round++;
     }
 
     else if (humanChoice == "PAPER" && computerChoice == "SCISSORS") {
         gameResult.textContent = "You lose... " + humanChoice + " beats " + computerChoice + "!";
-        gameResult.appendChild(resultButton);
-        roundEnd.textContent = "Continue";
+        btn_roundEnd.textContent = "Continue";
         computerScore++;
         round++;
     }
 
     else if (humanChoice == "SCISSORS" && computerChoice == "ROCK") {
         gameResult.textContent = "You lose... " + humanChoice + " beats " + computerChoice + "!";
-        gameResult.appendChild(resultButton);
-        roundEnd.textContent = "Continue";
+        btn_roundEnd.textContent = "Continue";
         computerScore++;
         round++;
     }
 
     else if (humanChoice == "SCISSORS" && computerChoice == "PAPER") {
         gameResult.textContent = "You win! " + humanChoice + " beats " + computerChoice + "!";
-        gameResult.appendChild(resultButton);
-        roundEnd.textContent = "Continue";
+        btn_roundEnd.textContent = "Continue";
         humanScore++;
         round++;
     }
 
     else {
         gameResult.textContent = "Something went wrong with the game, restarting round...";
-        gameResult.appendChild(resultButton);
-        roundEnd.textContent = "Restarting Round";
+        btn_roundEnd.textContent = "Restarting Round";
     }
 
-    gameResult.appendChild(roundEnd);
-    roundEnd.addEventListener("click", () => {
+    gameResult.appendChild(btn_roundEnd);
+    btn_roundEnd.addEventListener("click", () => {
         gameSection.removeChild(gameResult);
         playRound();
     });
@@ -217,6 +208,7 @@ function startGame() {
     btn_start.textContent = "Start Game";
 
     btn_start.addEventListener("click", () => {
+
         gameStart.removeChild(btn_start);
         gameScore.appendChild(roundScore);
         gameScore.appendChild(scoreboard);
@@ -234,7 +226,7 @@ btn_reset.addEventListener("click", () => {
 
 btn_cheat.addEventListener("click", () => {
     if (cheat == true) {
-        p.removeChild(cheatMsg);
+        toggleCheat.removeChild(cheatMsg);
         cheat = false;
         btn_cheat.textContent = "Cheat: OFF";
     }
@@ -242,7 +234,7 @@ btn_cheat.addEventListener("click", () => {
     else if (cheat == false) {
         cheat = true;
         btn_cheat.textContent = "Cheat: ON" ;
-        p.appendChild(cheatMsg);
+        toggleCheat.appendChild(cheatMsg);
     }
 });
 
