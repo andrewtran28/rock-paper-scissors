@@ -6,7 +6,11 @@ body {
     margin: 0;
     padding: 0;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-color: aliceblue;
+    background-color: rgb(255, 237, 196);
+}
+
+h1 {
+    font-size: 50px;
 }
 
 button {
@@ -15,21 +19,49 @@ button {
     margin: 10px 5px;
 }
 
+.options-cont {
+    font-size: 40px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid red;
+    margin: 20px;
+}
+
 .scoreboard {
     border: 1px solid blue;
+    background-color: lightblue;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: 30px;
+    font-weight: 600;
+    padding: 30px;
+    margin: 20px;
 }
 
 .rpsgame {
     border: 1px solid red;
+    background-color: rgb(255, 124, 124);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: 20px;
     font-weight: 600;
+    height: 250px;
+    width: 700px;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    background-color: #28455f;
+    color: #e5e7eb;
+    padding: 10px 0;
+    bottom: 0;
+    width: 100%;
+    position: absolute;
 }

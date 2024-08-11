@@ -59,21 +59,18 @@ function getHumanChoice() {
     btn_scissors.textContent = "Scissors";
 
     btn_rock.addEventListener("click", () => {
-        console.log("You chose ROCK");
         humanChoice = "ROCK";
         buttons.removeChild(showButtons);
         playResult();
     });
 
     btn_paper.addEventListener("click", () => {
-        console.log("You chose PAPER");
         humanChoice = "PAPER";
         buttons.removeChild(showButtons);
         playResult();
     });
 
     btn_scissors.addEventListener("click", () => {
-        console.log("You chose SCISSORS");
         humanChoice = "SCISSORS";
         buttons.removeChild(showButtons);
         playResult();
@@ -90,7 +87,6 @@ function playRound() {
     computerChoice = "";
 
     if (humanScore >= winCondition && computerScore < winCondition) {
-        console.log("Congratulations! You win the game!");
         endMsg.textContent = "Congratulations! You win the game! Start a new game?"
         continueButton.textContent = "Rematch";
         gameScore.appendChild(endMsg);
@@ -105,7 +101,6 @@ function playRound() {
     }
 
     else if (computerScore >= winCondition && humanScore < winCondition) {
-        console.log("You lost the game...");
         endMsg.textContent = "You lost the game... Rematch?"
         continueButton.textContent = "Rematch";
         gameScore.appendChild(endMsg);
@@ -128,7 +123,7 @@ function playRound() {
 
 function playResult() {
     let gameResult = document.createElement("div");
-    let resultButton = document.createElement("br");
+    let resultButton = document.createElement("div");
     let roundEnd = document.createElement("button");
     
     gameSection.innerHTML = "";
